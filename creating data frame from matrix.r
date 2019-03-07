@@ -1,10 +1,10 @@
-﻿library(reshape2)
+library(reshape2)
 #load the data table for "will + INF", convert it into a matrix with (as.matrix), and store it in a data called "will.matrix"
-		will.data<-read.table(file="C:/Users/Primahadi Wijaya/Dropbox/_Primahadi's Research/2014 September - Motion Charts/Future Constructions/will_INF.txt", header=T, sep="\t", row.names=1, quote="", comment.char="")
+		will.data<-read.table(file="will_INF.txt", header=T, sep="\t", row.names=1, quote="", comment.char="")
 		will.matrix<-as.matrix(will.data)
 		
 #load the data table for "BE going to + INF", convert it into a matrix with (as.matrix), and store it in a data called "go.matrix"
-		go.data<-read.table(file="C:/Users/Primahadi Wijaya/Dropbox/_Primahadi's Research/2014 September - Motion Charts/Future Constructions/go_INF.txt", header=T, sep="\t", row.names=1, quote="", comment.char="")
+		go.data<-read.table(file="go_INF.txt", header=T, sep="\t", row.names=1, quote="", comment.char="")
 		go.matrix<-as.matrix(go.data)
 		
 		names(attr(go.matrix, "dimnames"))[[2]]<-"decade" #naming dimension label
@@ -65,19 +65,19 @@ for (m in 1:4000) {
 futurate<-data.frame(cxn, coll, decade)
 mytable<-xtabs(~coll+cxn+decade, data=futurate)
 input.data<-dcast(futurate, decade+coll~cxn, fun.aggregate=length, value.var="cxn", drop=FALSE) #converting matrix/xtabs into a dataframe
-write.table(input.data, file="C:/Users/Primahadi Wijaya/Dropbox/_Primahadi's Research/2014 September - Motion Charts/Future Constructions/input_data_motion_raw.txt", quote=FALSE, sep="\t", col.names=NA)
+write.table(input.data, file="input_data_motion_raw.txt", quote=FALSE, sep="\t", col.names=NA)
 
 #creating a motion chart for FUTURATE Constructions
 library(googleVis)
-futurate<-read.table(file="C:/Users/Primahadi Wijaya/Dropbox/_Primahadi's Research/2014 September - Motion Charts/Future Constructions/input_data_motion_FUTURATE.txt", header=T, sep="\t", quote="", comment.char="")
+futurate<-read.table(file="input_data_motion_FUTURATE.txt", header=T, sep="\t", quote="", comment.char="")
 futurateplot<-gvisMotionChart(futurate, idvar="coll", timevar="decade", xvar="BE.going.to_INF", yvar="will_INF", colorvar="Diff", sizevar="Joint.Freq")
 plot(futurateplot)
 
 #outputting the HTML code of the motion charts
 futurate.html<-futurateplot$html$chart
-cat(futurateplot$html$chart, file="C:/Users/Primahadi Wijaya/Dropbox/_Primahadi's Research/2014 September - Motion Charts/Future Constructions/futurate_HTML.txt", sep="\n")
+cat(futurateplot$html$chart, file="futurate_HTML.txt", sep="\n")
 #outputting html gvis object to play locally
-cat(futurateplot$html$chart, file="C:/Users/Primahadi Wijaya/Dropbox/_Primahadi's Research/2014 September - Motion Charts/Future Constructions/future.html")
+cat(futurateplot$html$chart, file="future.html")
 
 #example of setting the axes limit in GoogleVis
 library(googleVis)

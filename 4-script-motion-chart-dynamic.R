@@ -5,10 +5,10 @@ futurateplot<-gvisMotionChart(futurate, idvar="coll", timevar="decade", xvar="go
 plot(futurateplot)
 
 #outputting the HTML code of the motion charts
-futurate.html<-futurateplot$html$chart
-cat(futurateplot$html$chart, file="futurate_HTML.txt", sep="\n")
+# futurate.html<-futurateplot$html$chart
+# cat(futurateplot$html$chart, file="futurate_HTML.txt", sep="\n")
 #outputting html gvis object to play locally
-cat(futurateplot$html$chart, file="future.html")
+# cat(futurateplot$html$chart, file="future.html")
 
 #example of setting the axes limit in GoogleVis
 # library(googleVis)

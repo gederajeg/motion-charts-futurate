@@ -1,6 +1,11 @@
 #creating a motion chart for FUTURATE Constructions
 library(googleVis)
 futurate<-read.table(file="input_data_futurate.txt", header=T, sep="\t", quote="", comment.char="")
+
+# NOTE! if you want to exclude data from 1810 and "be" and "have" auxiliaries,
+# as in Levshina (2015), run the following codes:
+futurate<-subset(futurate, decade!=1810 & !coll %in% c("be", "have"))
+
 futurateplot<-gvisMotionChart(futurate, idvar="coll", timevar="decade", xvar="going_to_norm", yvar="will_norm", colorvar="diff", sizevar="joint_freq")
 plot(futurateplot)
 
